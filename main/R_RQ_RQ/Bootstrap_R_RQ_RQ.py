@@ -111,3 +111,6 @@ def strap(residuals, FArr, ZArr, params):
  Params=list(zip(ms, evz, ParamNames))
  Paramsdf =pd.DataFrame(data = Params, columns=['Value', 'Error', 'Parameter'])
  Paramsdf.to_csv('Fitted_Parameters.csv')
+ 
+ #Return Fitted Params
+ return ms
