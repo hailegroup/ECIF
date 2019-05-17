@@ -3,7 +3,7 @@
 
 #Import Packages to be used in the file
 import numpy
-import fitting_IM as fit
+import Fitting_R_RQ_RQ as fit
 import statistics
 import pandas as pd
 
@@ -16,7 +16,7 @@ def strap(residuals, FArr, ZArr, params):
  
  #Break apart original complex array
  RArr = ZArr.real
- ImArr = ImArr.imag
+ ImArr = ZArr.imag
   
 #Obtain the Statistical parameters of the Residuals from original fitting (Needed input = Real + Imaginary Residuals)
  Real_res_error = statistics.stdev(Real_residuals)
