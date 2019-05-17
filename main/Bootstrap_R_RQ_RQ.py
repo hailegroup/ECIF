@@ -7,29 +7,37 @@ import fitting_IM as fit
 import statistics
 import pandas as pd
 
-#Obtain the Statistical parameters of the Residuals from original fitting (Needed input = Real + Imaginary Residuals)
-Real_res_error = statistics.stdev(Real_residuals)
-Imag_res_error = statistics.stdev(Imag_residuals)
-Real_res_mean = statistics.mean(Real_residuals)
-Imag_res_mean = statistics.mean(Imag_residuals)
+def strap(residuals, FArr, ZArr, params):
 
-#Obtain size of the vector
-length = int(len(Real_residuals))
+#Break apart complex array of original residuals
+ length=int(len(residuals)/2)
+ Real_residuals = residuals[0:length]
+ Imag_residuals = residuals[length:]
+ 
+ #Break apart original complex array
+ RArr = ZArr.real
+ ImArr = ImArr.imag
+  
+#Obtain the Statistical parameters of the Residuals from original fitting (Needed input = Real + Imaginary Residuals)
+ Real_res_error = statistics.stdev(Real_residuals)
+ Imag_res_error = statistics.stdev(Imag_residuals)
+ Real_res_mean = statistics.mean(Real_residuals)
+ Imag_res_mean = statistics.mean(Imag_residuals)
  
 #Initialize iterator
-i=0
+ i=0
 
 #Initialize list to carry distributions of fitted variables
-v1 = list()
-v2 = list()
-v3 = list()
-v4 = list()
-v5 = list()
-v6 = list()
-v7 = list()
+ v1 = list()
+ v2 = list()
+ v3 = list()
+ v4 = list()
+ v5 = list()
+ v6 = list()
+ v7 = list()
 
 #Main Bootstrap. Fitting to be performed x times in i<x
-while i<100:
+ while i<100:
     #Generate a new set of residuals based on the statistics acquired above. 
     Boot_R_residuals = numpy.random.normal(Real_res_mean,Real_res_error,size=length)
     Boot_i_residuals = numpy.random.normal(Imag_res_mean,Imag_res_error, size=length)
@@ -38,7 +46,7 @@ while i<100:
     new_i_boot = ImArr + Boot_i_residuals
     total_boot = new_r_boot + new_i_boot
     #Perform a fit on newly generated data (Requires parameter guesss)
-    fit_result = fit.custom_fitting(F, total_boot, params)
+    fit_result = fit.custom_fitting(FArr, total_boot, params)
     #Generate a list of variables from fit
     Fitted_variables = list(fit_result.x)
     
@@ -62,44 +70,44 @@ while i<100:
     i=i+1
    
 #Take the standard deviation of each of the fitted variables distributions    
-ev1=statistics.stdev(v1)
-ev2=statistics.stdev(v2)
-ev3=statistics.stdev(v3)
-ev4=statistics.stdev(v4)
-ev5=statistics.stdev(v5)
-ev6=statistics.stdev(v6)
-ev7=statistics.stdev(v7)
+ ev1=statistics.stdev(v1)
+ ev2=statistics.stdev(v2)
+ ev3=statistics.stdev(v3)
+ ev4=statistics.stdev(v4)
+ ev5=statistics.stdev(v5)
+ ev6=statistics.stdev(v6)
+ ev7=statistics.stdev(v7)
 
 #Take the average fit
-m1=statistics.mean(v1)
-m2=statistics.mean(v2)
-m3=statistics.mean(v3)
-m4=statistics.mean(v4)
-m5=statistics.mean(v5)
-m6=statistics.mean(v6)
-m7=statistics.mean(v7)
+ m1=statistics.mean(v1)
+ m2=statistics.mean(v2)
+ m3=statistics.mean(v3)
+ m4=statistics.mean(v4)
+ m5=statistics.mean(v5)
+ m6=statistics.mean(v6)
+ m7=statistics.mean(v7)
 
 #Compile all of the fitted variables errors into a single list
-evz=[]
-evz.append(ev1)
-evz.append(ev2)
-evz.append(ev3)
-evz.append(ev4)
-evz.append(ev5)
-evz.append(ev6)
-evz.append(ev7)
+ evz=[]
+ evz.append(ev1)
+ evz.append(ev2)
+ evz.append(ev3)
+ evz.append(ev4)
+ evz.append(ev5)
+ evz.append(ev6)
+ evz.append(ev7)
 
-ms=[]
-ms.append(m1)
-ms.append(m2)
-ms.append(m3)
-ms.append(m4)
-ms.append(m5)
-ms.append(m6)
-ms.append(m7)
+ ms=[]
+ ms.append(m1)
+ ms.append(m2)
+ ms.append(m3)
+ ms.append(m4)
+ ms.append(m5)
+ ms.append(m6)
+ ms.append(m7)
 
 #Compile and save these results to a csv
-ParamNames = ['Ohmic', 'R1', 'Q1', 'alpha1', 'R2', 'Q2', 'alpha2']   
-Params=list(zip(ms, evz, ParamNames))
-Paramsdf =pd.DataFrame(data = Params, columns=['Value', 'Error', 'Parameter'])
-Paramsdf.to_csv('Fitted_Parameters.csv')
+ ParamNames = ['Ohmic', 'R1', 'Q1', 'alpha1', 'R2', 'Q2', 'alpha2']   
+ Params=list(zip(ms, evz, ParamNames))
+ Paramsdf =pd.DataFrame(data = Params, columns=['Value', 'Error', 'Parameter'])
+ Paramsdf.to_csv('Fitted_Parameters.csv')
