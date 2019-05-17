@@ -34,11 +34,6 @@ params=[0.4, 0.8, 1*10**-2, 1, 0.9, 1*10**-2, 1]
 #Fit the data
 fit_result = fit.custom_fitting(F, TotArr, params)
 Fitted_variables = fit_result.x
-Generate_from_fit = fit.model(Fitted_variables, FArr)
-
-#Get Fitted data
-Real_Fit = Generate_from_fit.real
-Imag_Fit = Generate_from_fit.imag
 
 #Obtain the residuals
 residuals = fit.res_vec( Fitted_variables, FArr, TotArr)
