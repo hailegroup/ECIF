@@ -6,6 +6,7 @@ import numpy
 import Fitting_R_RQ_RQ as fit
 import statistics
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def strap(residuals, FArr, ZArr, params):
 
@@ -45,6 +46,11 @@ def strap(residuals, FArr, ZArr, params):
     new_r_boot = RArr + Boot_R_residuals
     new_i_boot = ImArr + Boot_i_residuals
     total_boot = new_r_boot + new_i_boot
+    
+    #Check simulated impedance
+    plt.plot(new_r_boot, -new_i_boot)
+    plt.savefig("boots.png")
+    
     #Perform a fit on newly generated data (Requires parameter guesss)
     fit_result = fit.custom_fitting(FArr, total_boot, params)
     #Generate a list of variables from fit
@@ -111,6 +117,9 @@ def strap(residuals, FArr, ZArr, params):
  Params=list(zip(ms, evz, ParamNames))
  Paramsdf =pd.DataFrame(data = Params, columns=['Value', 'Error', 'Parameter'])
  Paramsdf.to_csv('Fitted_Parameters.csv')
+ 
+ #Clear figure at end of program
+ plt.clf()
  
  #Return Fitted Params
  return ms
