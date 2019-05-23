@@ -34,9 +34,6 @@ params=[0.4, 0.8, 1*10**-2, 1, 0.9, 1*10**-2, 1]
 #Fit the data
 fit_result = fit.custom_fitting(F, TotArr, params)
 Fitted_variables = fit_result.x
-generation = fit.model(Fitted_variables, FArr)
-First_Fit_R = generation.real
-First_Fit_i = generation.imag
 
 #Obtain the residuals
 residuals = fit.res_vec( Fitted_variables, FArr, TotArr)
@@ -50,6 +47,4 @@ Imag_Boot_Fit = boot_generation.imag
 #Nyquist Plot
 plt.plot(Real_Boot_Fit, -Imag_Boot_Fit, label = 'Boot Fit')
 plt.plot(R, Im, label = 'Measured')
-plt.plot(First_Fit_R, -First_Fit_i, label = 'First Fit')
-plt.legend(loc='upper left')
 
