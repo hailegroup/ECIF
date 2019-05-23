@@ -45,7 +45,7 @@ def strap(residuals, FArr, ZArr, params):
     #Generate a new data set based on these residuals (Requires original impedance data)
     new_r_boot = RArr + Boot_R_residuals
     new_i_boot = ImArr + Boot_i_residuals
-    total_boot = new_r_boot + new_i_boot
+    total_boot = new_r_boot + 1j*new_i_boot
     
     #Check simulated impedance
     plt.plot(new_r_boot, -new_i_boot)
