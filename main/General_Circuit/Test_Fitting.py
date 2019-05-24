@@ -2,15 +2,15 @@
 
 #Import the necessary libraries
 import numpy
-import Fitting_R_RQ_RQ as fit
-import Bootstrap_R_RQ_RQ as boot
+import Fitting as fit
+import Bootstrap as boot
 import matplotlib.pyplot as plt
 import statistics
 import config
 
 #Acquire user input from config file
 modelname = config.Circuit_Type
-parameters = config.Initial_Parameters
+params = config.Initial_Parameters
 
 #Open test file
 file=open('test.csv', 'r', encoding='cp1252')
@@ -33,11 +33,8 @@ RArr=numpy.array(R)
 ImArr=-numpy.array(Im)*1j
 TotArr=RArr+ImArr
 
-#Initial parameter guess
-params=[0.4, 0.8, 1*10**-2, 1, 0.9, 1*10**-2, 1]
-
 #Fit the data
-fit_result = fit.custom_fitting(F, TotArr, params)
+fit_result = fit.custom_fitting(F, TotArr, params, modelname)
 Fitted_variables = fit_result.x
 
 #Obtain the residuals
