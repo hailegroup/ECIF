@@ -8,7 +8,7 @@ modelname = config.Circuit_Type
 
 # define impedance model
 def model(parameters, x, modelname):
-    result, bound = cir.Z(parameters, x, modelname)
+    result, lower_bound, upper_bound = cir.Z(parameters, x, modelname)
 
 # define residual function for fitting
 def res_vec(parameters, x, y):
@@ -26,5 +26,5 @@ def custom_fitting(freq, data, parameters):
     x_data = numpy.array(freq)
     y_data = numpy.array(data)
     parameters = numpy.array(parameters)
-    fitting_result = least_squares(res_vec,parameters,bounds, args=(x_data, y_data))
+    fitting_result = least_squares(res_vec,parameters,bounds=(lower_bound,upper_bound), args=(x_data, y_data))
     return fitting_result
