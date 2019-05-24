@@ -9,7 +9,6 @@ import statistics
 import config
 
 #Acquire user input from config file
-modelname = config.Circuit_Type
 params = config.Initial_Parameters
 
 #Open test file
@@ -34,7 +33,7 @@ ImArr=-numpy.array(Im)*1j
 TotArr=RArr+ImArr
 
 #Fit the data
-fit_result = fit.custom_fitting(F, TotArr, params, modelname)
+fit_result = fit.custom_fitting(F, TotArr, params)
 Fitted_variables = fit_result.x
 
 #Obtain the residuals
