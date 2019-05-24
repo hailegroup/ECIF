@@ -1,5 +1,5 @@
 ### Impedance-Fitting ###
-This program is fits impedance data with equivalent circuit models using a least-sqares fitting method through python. This program will provide fitted variables along with a fitted pattern corresponding with those variables. Additionaly, an error of these fitted variables is provided via a bootstrapping error calculation method.
+This program fits impedance data with equivalent circuit models using a least-sqares fitting method through python. This program will provide fitted variables along with a fitted pattern corresponding with those variables. Additionaly, an error of these fitted variables is provided via a bootstrapping error calculation method.
 
 ## Steps to run the program ##
 1. Install Python 3.x or greater on your computer. 
