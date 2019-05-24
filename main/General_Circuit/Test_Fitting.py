@@ -6,6 +6,11 @@ import Fitting_R_RQ_RQ as fit
 import Bootstrap_R_RQ_RQ as boot
 import matplotlib.pyplot as plt
 import statistics
+import config
+
+#Acquire user input from config file
+modelname = config.Circuit_Type
+parameters = config.Initial_Parameters
 
 #Open test file
 file=open('test.csv', 'r', encoding='cp1252')
