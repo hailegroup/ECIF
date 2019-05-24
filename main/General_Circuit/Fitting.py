@@ -12,7 +12,7 @@ def model(parameters, x, modelname):
 
 # define residual function for fitting
 def res_vec(parameters, x, y):
-    y_cal, bounds = model(parameters, x, modelname)
+    y_cal, lb, ub = model(parameters, x, modelname)
     z = y-y_cal
     modulus = numpy.sqrt(y_cal.real ** 2 + y_cal.imag ** 2)
     a = z.real/modulus
@@ -23,8 +23,10 @@ def res_vec(parameters, x, y):
 
 # least-square fitting
 def custom_fitting(freq, data, parameters):
+    blank, lb, ub = model(parameters, freq, modelname)
     x_data = numpy.array(freq)
     y_data = numpy.array(data)
     parameters = numpy.array(parameters)
-    fitting_result = least_squares(res_vec,parameters,bounds=(lower_bound,upper_bound), args=(x_data, y_data))
+    fitting_result = least_squares(res_vec,parameters,bounds=(lb,ub), args=(x_data, y_data))
     return fitting_result
+
