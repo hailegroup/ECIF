@@ -7,9 +7,6 @@ import Fitting as fit
 import statistics
 import pandas as pd
 import matplotlib.pyplot as plt
-import config
-
-modelname=config.Circuit_Type
 
 def strap(residuals, FArr, ZArr, params):
 
@@ -55,7 +52,7 @@ def strap(residuals, FArr, ZArr, params):
     plt.savefig("boots.png")
     
     #Perform a fit on newly generated data (Requires parameter guesss)
-    fit_result = fit.custom_fitting(FArr, total_boot, params, modelname)
+    fit_result = fit.custom_fitting(FArr, total_boot, params)
     #Generate a list of variables from fit
     Fitted_variables = list(fit_result.x)
     
