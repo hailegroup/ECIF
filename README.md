@@ -5,11 +5,11 @@ This program fits impedance data with equivalent circuit models using a least-sq
 1. Install Python 3.x or greater on your computer. 
 1. Download all files here into a file location on your local computer.
 1. Format your data into a three column format csv file with frequency in the first column, the real component of impedance in the second column, and the imaginary component of impedance in the third column.
-1. Place this file in /main/General_Circuit
+1. Place this file in /main/General_Circuit.
 1. In /main/General_Circuit/config.py type the model you want to fit to inside the quotes. Available circuits are: R, RRC, RRCRC, RRCRCRC, RRQ, RRQRQ, and RRQRQRQ.
 1. Type in an initial guess for each parameter to be fit inside the brackets.
 1. Open a python console.
-1. Change your working directory to /main/General_Circuit
-1. Run Fitting.py
+1. Change your working directory to /main/General_Circuit.
+1. Run Fitting.py.
 
 
