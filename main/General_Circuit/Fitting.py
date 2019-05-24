@@ -1,10 +1,13 @@
 import numpy
 from scipy.optimize import least_squares
 import Circuits as cir
+import config
+
+modelname = config.Circuit_Type
 
 # define impedance model
 def model(parameters, x, modelname):
-    result, bound = Circuits.Z(parameters, x, modelname)
+    result, bound = cir.Z(parameters, x, modelname)
 
 # define residual function for fitting
 def res_vec(parameters, x, y):
