@@ -1,5 +1,5 @@
 #This file contains all of the user based inputs
 
-Circuit_Type = '' #e.g. 'RC'
+Circuit_Type = 'RRQRQ' #e.g. 'RC'
 
-Initial paramters = [ ... ] #e. g. [a, b, c, d, e]
+Initial paramters = [0.4, 0.4, 1*10**-2, 1, 0.4, 1*10**-2, 1] #e. g. [a, b, c, d, e]
