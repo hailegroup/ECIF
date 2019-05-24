@@ -3,6 +3,7 @@ from scipy.optimize import least_squares
 import Circuits as cir
 import config
 
+#Get the type of circuit from the config file
 modelname = config.Circuit_Type
 
 # define impedance model
