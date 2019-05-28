@@ -8,6 +8,7 @@ modelname = config.Circuit_Type
 
 # define residual function for fitting
 def res_vec(parameters, x, y):
+    result, lb, ub = cir.Z(parameters, x, modelname)
     z = y-result
     modulus = numpy.sqrt(result.real ** 2 + result.imag ** 2)
     a = z.real/modulus
