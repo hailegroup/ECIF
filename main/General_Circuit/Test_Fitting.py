@@ -5,11 +5,12 @@ import numpy
 import Fitting as fit
 import Bootstrap as boot
 import matplotlib.pyplot as plt
-import statistics
 import config
+import Circuits as cir
 
 #Acquire user input from config file
 params = config.Initial_Parameters
+modelname = config.Circuit_Type
 
 #Open test file
 file=open('test.csv', 'r', encoding='cp1252')
@@ -41,11 +42,10 @@ residuals = fit.res_vec( Fitted_variables, FArr, TotArr)
 
 #Bootstrap to get error and generate final model
 boot_params = boot.strap(residuals, FArr, TotArr, Fitted_variables)
-boot_generation = fit.model(boot_params, FArr)
+boot_generation, dummy1, dummy2 = cir.Z(boot_params, FArr, modelname)
 Real_Boot_Fit = boot_generation.real
 Imag_Boot_Fit = boot_generation.imag
 
 #Nyquist Plot
 plt.plot(Real_Boot_Fit, -Imag_Boot_Fit, label = 'Boot Fit')
 plt.plot(R, Im, label = 'Measured')
-
