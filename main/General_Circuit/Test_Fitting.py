@@ -11,9 +11,10 @@ import Circuits as cir
 #Acquire user input from config file
 params = config.Initial_Parameters
 modelname = config.Circuit_Type
+filename = config.Filename
 
 #Open test file
-file=open('test.csv', 'r', encoding='cp1252')
+file=open('filename', 'r', encoding='cp1252')
 
 #Initialize lists
 F=[]
