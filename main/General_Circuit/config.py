@@ -6,7 +6,7 @@ Initial_Parameters = [0.4, 0.4, 1*10**-2, 1, 0.4, 1*10**-2, 1] #e. g. [a, b, c, 
 
 Parameter_Lower_Bounds = [0.0, 0.0, 0.0, 0.0, 0.0 , 0.0 , 0.0]
 
-Parameter_Upper_Bounds = []
+Parameter_Upper_Bounds = [numpy.inf, numpy.inf, numpy.inf, 1.0, numpy.inf, numpy.inf, 1.0]
 
 Filename = 'test.csv' #Should be three columned csv with that contains frequency, real, and imaginary impedance respectively
 
