@@ -1,4 +1,5 @@
 #This file contains all of the user based inputs
+import numpy
 
 Circuit_Type = 'RRQRQ' #e.g. 'RC'
 
