@@ -2,7 +2,8 @@
 This program fits impedance data with equivalent circuit models using a least-sqares fitting method through python. This program will provide fitted variables along with a fitted pattern corresponding with those variables. Additionaly, an error of these fitted variables is provided via a bootstrapping error calculation method.
 
 ## Steps to run the program ##
-1. Install Python 3.x or greater on your computer. 
+1. Install Python 3.x or greater on your computer.
+1. Install all the necessary libraries
 1. Download all files here into a file location on your local computer.
 1. Format your data into a three column format csv file with frequency in the first column, the real component of impedance in the second column, and the imaginary component of impedance in the third column.
 1. Place this file in /main/General_Circuit.
