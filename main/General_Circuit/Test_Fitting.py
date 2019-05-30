@@ -53,5 +53,5 @@ Imag_Boot_Fit = boot_generation.imag
 
 #Nyquist Plot
 plt.plot(Real_Boot_Fit, -Imag_Boot_Fit, label = 'Boot Fit')
-plt.plot(R, -Im, label = 'Measured')
-
+ImArrp = numpy.array(Im)
+plt.plot(RArr, -ImArrp, label = 'Measured')
