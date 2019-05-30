@@ -35,7 +35,7 @@ for line in file.readlines()[1:]:
 #Form data into complex array
 FArr=numpy.array(F)
 RArr=numpy.array(R)
-ImArr=-numpy.array(Im)*1j
+ImArr=numpy.array(Im)*1j
 TotArr=RArr+ImArr
 
 #Fit the data
@@ -53,5 +53,5 @@ Imag_Boot_Fit = boot_generation.imag
 
 #Nyquist Plot
 plt.plot(Real_Boot_Fit, -Imag_Boot_Fit, label = 'Boot Fit')
-plt.plot(R, Im, label = 'Measured')
+plt.plot(R, -Im, label = 'Measured')
 
