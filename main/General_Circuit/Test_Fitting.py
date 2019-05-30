@@ -12,9 +12,11 @@ import Circuits as cir
 params = config.Initial_Parameters
 modelname = config.Circuit_Type
 filename = config.Filename
+FreqLB = config.Frequency_Domain[0]
+FreqUB = config.Frequency_Domain[1]
 
 #Open test file
-file=open('filename', 'r', encoding='cp1252')
+file=open(filename, 'r', encoding='cp1252')
 
 #Initialize lists
 F=[]
@@ -24,9 +26,11 @@ Im=[]
 #Read in the file
 for line in file.readlines()[1:]:
     fields=line.split(',')
-    F=F+[float(fields[0])]
-    R=R+[float(fields[1])]
-    Im=Im+[float(fields[2])]
+    Fre = float(fields[0])
+    if Fre >= FreqLB and Fre <= FreqUB:
+        F=F+[float(fields[0])]
+        R=R+[float(fields[1])]
+        Im=Im+[float(fields[2])]
 
 #Form data into complex array
 FArr=numpy.array(F)
@@ -50,3 +54,4 @@ Imag_Boot_Fit = boot_generation.imag
 #Nyquist Plot
 plt.plot(Real_Boot_Fit, -Imag_Boot_Fit, label = 'Boot Fit')
 plt.plot(R, Im, label = 'Measured')
+
