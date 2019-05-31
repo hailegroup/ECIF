@@ -1,4 +1,4 @@
-#This use case is for a gradaute student (GS) with introductory electrochemical impedance spectroscopy, computer file management, and programming.
+This use case is for a gradaute student (GS) with introductory electrochemical impedance spectroscopy, computer file management, and programming.
 
 ### Perform a general impedance fit ###
 
