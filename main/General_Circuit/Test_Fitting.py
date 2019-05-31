@@ -7,7 +7,6 @@ import Bootstrap as boot
 import matplotlib.pyplot as plt
 #For setting ticks on plot
 from matplotlib.ticker import AutoMinorLocator
-from matplotlib.ticker import LogLocator
 #Get user parameters
 import config
 #Get circuit of interest
