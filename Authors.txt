@@ -2,12 +2,12 @@ This code was developed in the Haile Group at Northwestern University.
 
 The main developers are:
 
-    Ruyiun Huang
     Austin Plymill
+    Ruyiun Huang
 
 
 Contributions and extensive testing of the code was carried out by current
-members of the Haile and Billinge groups.
+members of the Haile group.
 
 For more information email austinplymill2021@u.northwestern.edu
 
