@@ -38,7 +38,7 @@ def strap(residuals, FArr, ZArr, params):
  v7 = list()
 
 #Main Bootstrap. Fitting to be performed x times in i<x
- while i<100:
+ while i<50:
     #Generate a new set of residuals based on the statistics acquired above. 
     Boot_R_residuals = numpy.random.normal(Real_res_mean,Real_res_error,size=length)
     Boot_i_residuals = numpy.random.normal(Imag_res_mean,Imag_res_error, size=length)
@@ -112,11 +112,10 @@ def strap(residuals, FArr, ZArr, params):
  ms.append(m6)
  ms.append(m7)
 
-#Compile and save these results to a csv
- ParamNames = ['Ohmic', 'R1', 'Q1', 'alpha1', 'R2', 'Q2', 'alpha2']   
- Params=list(zip(ms, evz, ParamNames))
- Paramsdf =pd.DataFrame(data = Params, columns=['Value', 'Error', 'Parameter'])
- Paramsdf.to_csv('Fitted_Parameters.csv')
+#Compile and save these results to a csv 
+ Params=list(zip(ms, evz))
+ Paramsdf =pd.DataFrame(data = Params, columns=['Value', 'Error'])
+ Paramsdf.to_csv('Fitted_Parameters.csv', index=False)
  
  #Clear figure at end of program
  plt.clf()
