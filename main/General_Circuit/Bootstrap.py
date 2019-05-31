@@ -36,6 +36,9 @@ def strap(residuals, FArr, ZArr, params):
  v5 = list()
  v6 = list()
  v7 = list()
+ 
+ #Initialize Parameters list
+ global Param_names
 
 #Main Bootstrap. Fitting to be performed x times in i<x
  while i<50:
@@ -52,7 +55,7 @@ def strap(residuals, FArr, ZArr, params):
     #plt.savefig("boots.png")
     
     #Perform a fit on newly generated data (Requires parameter guesss)
-    fit_result = fit.custom_fitting(FArr, total_boot, params)
+    fit_result, pn = fit.custom_fitting(FArr, total_boot, params)
     #Generate a list of variables from fit
     Fitted_variables = list(fit_result.x)
     
@@ -74,6 +77,8 @@ def strap(residuals, FArr, ZArr, params):
     v6.append(f)
     v7.append(g)
     i=i+1
+    
+    Param_names = pn
    
 #Take the standard deviation of each of the fitted variables distributions    
  ev1=statistics.stdev(v1)
@@ -113,8 +118,8 @@ def strap(residuals, FArr, ZArr, params):
  ms.append(m7)
 
 #Compile and save these results to a csv 
- Params=list(zip(ms, evz))
- Paramsdf =pd.DataFrame(data = Params, columns=['Value', 'Error'])
+ Params=list(zip(Param_names, ms, evz))
+ Paramsdf =pd.DataFrame(data = Params, columns=['Parameters', 'Value', 'Error'])
  Paramsdf.to_csv('Fitted_Parameters.csv', index=False)
  
  #Clear figure at end of program
