@@ -13,6 +13,10 @@ import config
 import Circuits as cir
 #For generating TIF files
 from PIL import Image
+#For command line commands
+import os
+#For moving and sorting files
+import shutil
 
 #Acquire user input from config file
 params = config.Initial_Parameters
@@ -104,3 +108,15 @@ plt.savefig("Bode.png")
 png0 = Image.open("Bode.png")
 png0.save("Bode.tiff", dpi=(300,300))
 plt.clf()
+
+#Clean up
+os.makedirs("Fitting Report")
+os.makedirs("Plots")
+os.makedirs("Values")
+shutil.move("Nyquist.png","Plots")
+shutil.move("Nyquist.tiff", "Plots")
+shutil.move("Bode.png", "Plots")
+shutil.move("Bode.tiff", "Plots")
+shutil.move('Fitted_Parameters.csv', "Values")
+shutil.move("Plots", "Fitting Report")
+shutil.move("Values", "Fitting Report")
