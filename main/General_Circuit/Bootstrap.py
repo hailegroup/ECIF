@@ -47,9 +47,9 @@ def strap(residuals, FArr, ZArr, params):
     new_i_boot = ImArr + Boot_i_residuals
     total_boot = new_r_boot + 1j*new_i_boot
     
-    #Check simulated impedance
-    plt.plot(new_r_boot, -new_i_boot)
-    plt.savefig("boots.png")
+    #Check simulated impedance (uncomment to check boots)
+    #plt.plot(new_r_boot, -new_i_boot)
+    #plt.savefig("boots.png")
     
     #Perform a fit on newly generated data (Requires parameter guesss)
     fit_result = fit.custom_fitting(FArr, total_boot, params)
