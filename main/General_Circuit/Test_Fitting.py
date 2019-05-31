@@ -32,6 +32,7 @@ file=open(filename, 'r', encoding='cp1252')
 F=[]
 R=[]
 Im=[]
+thetas=[]
 
 #Read in the file
 for line in file.readlines()[1:]:
@@ -41,6 +42,8 @@ for line in file.readlines()[1:]:
         F=F+[float(fields[0])]
         R=R+[float(fields[1])]
         Im=Im+[float(fields[2])]
+        thetas=thetas+[numpy.arctan(float(fields[2])/float(fields[1]))]
+
 
 #Form data into complex array
 FArr=numpy.array(F)
@@ -60,6 +63,12 @@ boot_params = boot.strap(residuals, FArr, TotArr, Fitted_variables)
 boot_generation, dummy1, dummy2, dummy3 = cir.Z(boot_params, FArr, modelname)
 Real_Boot_Fit = boot_generation.real
 Imag_Boot_Fit = boot_generation.imag
+Thetas_Fit = []
+i=0
+for x in Real_Boot_Fit:
+    theta = numpy.arctan(Imag_Boot_Fit[i]/Real_Boot_Fit[i])
+    Thetas_Fit = Thetas_Fit + [theta]
+    i=i+1
 
 ##Nyquist plot##
 ImArrp = numpy.array(Im)
@@ -88,7 +97,7 @@ png0 = Image.open("Nyquist.png")
 png0.save("Nyquist.tiff", dpi=(300,300))
 plt.clf()
 
-##Real Bode plot##
+##Bode plot##
 plt.style.use('classic')
 Measured_Modulus = numpy.sqrt(RArr ** 2 + ImArrp ** 2)
 Fitted_Modulus = numpy.sqrt(Real_Boot_Fit ** 2 + Imag_Boot_Fit ** 2)
@@ -109,6 +118,23 @@ png0 = Image.open("Bode.png")
 png0.save("Bode.tiff", dpi=(300,300))
 plt.clf()
 
+#Thetas
+fig, ax = plt.subplots(figsize=(5,5),dpi=300)
+ax.plot(FArr, thetas, 'o', color = 'black', linewidth=2, label="Measured")
+ax.plot(FArr, Thetas_Fit, '-', color = 'blue', linewidth=2, label="Fit")
+legend = ax.legend(loc='upper right', fontsize='medium')
+
+ax.set_xscale('log')
+ax.set_xlabel('Theta', size='large')
+ax.set_ylabel('|Z|', size='large')
+
+
+legend.get_frame().set_edgecolor('#ffffff')
+plt.savefig("Bode_Theta.png")
+png0 = Image.open("Bode_Theta.png")
+png0.save("Bode_Theta.tiff", dpi=(300,300))
+plt.clf()
+
 #Clean up
 os.makedirs("Fitting Report")
 os.makedirs("Plots")
@@ -117,6 +143,8 @@ shutil.move("Nyquist.png","Plots")
 shutil.move("Nyquist.tiff", "Plots")
 shutil.move("Bode.png", "Plots")
 shutil.move("Bode.tiff", "Plots")
+shutil.move("Bode_Theta.png", "Plots")
+shutil.move("Bode_Theta.tiff", "Plots")
 shutil.move('Fitted_Parameters.csv', "Values")
 shutil.move("Plots", "Fitting Report")
 shutil.move("Values", "Fitting Report")
