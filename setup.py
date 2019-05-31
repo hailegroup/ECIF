@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+nfrom setuptools import setup, find_packages
 
 names = [
 ]
@@ -15,7 +15,7 @@ setup(
     packages=find_packages(),
     description="python API for impedance fitting",
     zip_safe=False,
-    package_data={"pytentiostat": ["config/*"]},
+    package_data={"Impedance-Fitting": ["config/*"]},
     include_package_data=True,
     url="http:/github.com/aplymill7/Impedance-Fitting",
     entry_points=entry_points,
