@@ -5,8 +5,14 @@ import numpy
 import Fitting as fit
 import Bootstrap as boot
 import matplotlib.pyplot as plt
+#For setting ticks on plot
+from matplotlib.ticker import AutoMinorLocator
+#Get user parameters
 import config
+#Get circuit of interest
 import Circuits as cir
+#For generating TIF files
+from PIL import Image
 
 #Acquire user input from config file
 params = config.Initial_Parameters
@@ -51,7 +57,29 @@ boot_generation, dummy1, dummy2 = cir.Z(boot_params, FArr, modelname)
 Real_Boot_Fit = boot_generation.real
 Imag_Boot_Fit = boot_generation.imag
 
-#Nyquist Plot
-plt.plot(Real_Boot_Fit, -Imag_Boot_Fit, label = 'Boot Fit')
+#Plot this data
 ImArrp = numpy.array(Im)
-plt.plot(RArr, -ImArrp, label = 'Measured')
+fig, ax = plt.subplots(figsize=(5,5),dpi=300)
+ax.plot(RArr, -ImArrp, 'o', color = 'black', linewidth=2, label="Measured")
+ax.plot(Real_Boot_Fit, -Imag_Boot_Fit, '-', color = 'blue', linewidth=2, label="Fit")
+legend = ax.legend(loc='upper left', fontsize='medium')
+
+#Get max impedance to square the plot
+Rs = numpy.concatenate((RArr, -ImArrp, Real_Boot_Fit, -Imag_Boot_Fit))
+maxest=Rs.max()
+ax.set_xlim([0,maxest+0.1])
+ax.set_ylim([0,maxest+0.1])
+ax.set_xlabel(r'R $\mathregular{(\Omega\bullet cm^{2})}$', size='x-large')
+ax.set_ylabel(r'-Im $\mathregular{(\Omega\bullet cm^{2})}$', size='x-large')
+
+ax.tick_params(axis='both', direction='in', width = 1.0, length = 3)
+ax.xaxis.set_minor_locator(AutoMinorLocator(4))
+ax.xaxis.set_tick_params(which='minor', top = 'off', direction='in')
+ax.yaxis.set_minor_locator(AutoMinorLocator(4))
+ax.yaxis.set_tick_params(which='minor', right = 'off', direction='in')
+
+legend.get_frame().set_edgecolor('#ffffff')
+plt.savefig("EIS.png")
+png0 = Image.open("EIS.png")
+png0.save("EIS.tiff", dpi=(300,300))
+plt.clf()
