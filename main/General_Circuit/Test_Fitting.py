@@ -49,7 +49,7 @@ ImArr=numpy.array(Im)*1j
 TotArr=RArr+ImArr
 
 #Fit the data
-fit_result = fit.custom_fitting(F, TotArr, params)
+fit_result, dummy = fit.custom_fitting(F, TotArr, params)
 Fitted_variables = fit_result.x
 
 #Obtain the residuals
@@ -57,7 +57,7 @@ residuals = fit.res_vec( Fitted_variables, FArr, TotArr)
 
 #Bootstrap to get error and generate final model
 boot_params = boot.strap(residuals, FArr, TotArr, Fitted_variables)
-boot_generation, dummy1, dummy2 = cir.Z(boot_params, FArr, modelname)
+boot_generation, dummy1, dummy2, dummy3 = cir.Z(boot_params, FArr, modelname)
 Real_Boot_Fit = boot_generation.real
 Imag_Boot_Fit = boot_generation.imag
 
