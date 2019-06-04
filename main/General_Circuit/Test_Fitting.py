@@ -60,7 +60,8 @@ residuals = fit.res_vec( Fitted_variables, FArr, TotArr)
 
 #Bootstrap to get error and generate final model
 boot_params = boot.strap(residuals, FArr, TotArr, Fitted_variables)
-boot_generation, dummy1, dummy2, dummy3 = cir.Z(boot_params, FArr, modelname)
+result = cir.Z(boot_params, FArr, modelname)
+boot_generation = result.z
 Real_Boot_Fit = boot_generation.real
 Imag_Boot_Fit = boot_generation.imag
 Thetas_Fit = []
@@ -148,3 +149,4 @@ shutil.move("Bode_Theta.tiff", "Plots")
 shutil.move('Fitted_Parameters.csv', "Values")
 shutil.move("Plots", "Fitting Report")
 shutil.move("Values", "Fitting Report")
+
