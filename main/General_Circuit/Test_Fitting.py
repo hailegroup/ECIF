@@ -103,7 +103,7 @@ plt.style.use('classic')
 Measured_Modulus = numpy.sqrt(RArr ** 2 + ImArrp ** 2)
 Fitted_Modulus = numpy.sqrt(Real_Boot_Fit ** 2 + Imag_Boot_Fit ** 2)
 
-fig, ax = plt.subplots(figsize=(5,5),dpi=300)
+fig, ax = plt.subplots(figsize=(10,5),dpi=300)
 ax.plot(FArr, Measured_Modulus, 'o', color = 'black', linewidth=2, label="Measured")
 ax.plot(FArr, Fitted_Modulus, '-', color = 'blue', linewidth=2, label="Fit")
 legend = ax.legend(loc='upper right', fontsize='medium')
@@ -120,15 +120,14 @@ png0.save("Bode.tiff", dpi=(300,300))
 plt.clf()
 
 #Thetas
-fig, ax = plt.subplots(figsize=(5,5),dpi=300)
+fig, ax = plt.subplots(figsize=(10,5),dpi=300)
 ax.plot(FArr, thetas, 'o', color = 'black', linewidth=2, label="Measured")
 ax.plot(FArr, Thetas_Fit, '-', color = 'blue', linewidth=2, label="Fit")
-legend = ax.legend(loc='upper right', fontsize='medium')
+legend = ax.legend(loc='lower right', fontsize='medium')
 
 ax.set_xscale('log')
-ax.set_xlabel('Theta', size='large')
-ax.set_ylabel('|Z|', size='large')
-
+ax.set_xlabel('Frequency (Hz)', size='large')
+ax.set_ylabel(r'$\theta $', size='large')
 
 legend.get_frame().set_edgecolor('#ffffff')
 plt.savefig("Bode_Theta.png")
@@ -149,4 +148,3 @@ shutil.move("Bode_Theta.tiff", "Plots")
 shutil.move('Fitted_Parameters.csv', "Values")
 shutil.move("Plots", "Fitting Report")
 shutil.move("Values", "Fitting Report")
-
