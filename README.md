@@ -13,4 +13,10 @@ This program fits impedance data with equivalent circuit models using a least-sq
 1. Change your working directory to /main/General_Circuit.
 1. Run Fitting.py.
 
+## Running the Example ##
+
+If you ran the script with the default values using the test data you should have the following figures in the fitting result report in your working directory:
+
+![Image of Z vs. theta](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Bode.png)
+
 
