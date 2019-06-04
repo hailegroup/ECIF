@@ -8,9 +8,10 @@ modelname = config.Circuit_Type
 
 # define residual function for fitting
 def res_vec(parameters, x, y):
-    result, lb, ub, dummy = cir.Z(parameters, x, modelname)
-    z = y-result
-    modulus = numpy.sqrt(result.real ** 2 + result.imag ** 2)
+    result= cir.Z(parameters, x, modelname)
+    As_recieved = result.z
+    z = y-As_recieved
+    modulus = numpy.sqrt(As_recieved.real ** 2 + As_recieved.imag ** 2)
     a = z.real/modulus
     b = z.imag/modulus
     z = a.tolist()+b.tolist()
@@ -19,9 +20,9 @@ def res_vec(parameters, x, y):
 
 # least-square fitting
 def custom_fitting(freq, data, parameters):
-    result, lb, ub, Param_names = cir.Z(parameters, freq, modelname)
+    result= cir.Z(parameters, freq, modelname)
     x_data = numpy.array(freq)
     y_data = numpy.array(data)
     parameters = numpy.array(parameters)
-    fitting_result = least_squares(res_vec,parameters,bounds=(lb,ub), args=(x_data, y_data))
-    return fitting_result, Param_names
+    fitting_result = least_squares(res_vec,parameters,bounds=(result.low_bound,result.high_bound), args=(x_data, y_data))
+    return fitting_result, result.parameters_names
