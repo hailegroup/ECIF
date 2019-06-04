@@ -17,6 +17,8 @@ This program fits impedance data with equivalent circuit models using a least-sq
 
 If you ran the script with the default values using the test data you should have the following figures in the fitting result report in your working directory:
 
-![Image of Z vs. theta](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Bode.png)
+![Image of Z vs. F](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Bode.png)
+![Image of Z vs. theta](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Bode_Theta.png)
+![Image of Nyquist Plot](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Nyquist.png)
 
 
