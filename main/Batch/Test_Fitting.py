@@ -18,24 +18,6 @@ from PIL import Image
 import os
 #For moving and sorting files
 import shutil
-
-#Find all matches to pattern from this string and returns them
-def collector(content, ptrn):
-    regex = re.search(ptrn, content)
-    if regex is False:
-        return None         
-    else:
-        new_string = regex.group()
-        return(new_string)
-        
-#Appends result from collector to a desired list if was a match       
-def creator(v, list):
-    if (v==None):
-        list=list
-    else:
-        list.append(v)
-        
-
         
 #Acquire user input from config file
 params = config.Initial_Parameters
