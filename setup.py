@@ -17,6 +17,6 @@ setup(
     zip_safe=False,
     package_data={"Impedance-Fitting": ["config/*"]},
     include_package_data=True,
-    url="http:/github.com/aplymill7/Impedance-Fitting",
+    url="http:/github.com/aplymill7/ECIF",
     entry_points=entry_points,
 )
