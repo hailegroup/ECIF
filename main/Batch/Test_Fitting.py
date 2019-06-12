@@ -6,6 +6,7 @@ import numpy
 import Fitting as fit
 import Bootstrap as boot
 import matplotlib.pyplot as plt
+import pandas as pd
 #For setting ticks on plot
 from matplotlib.ticker import AutoMinorLocator
 #Get user parameters
@@ -83,8 +84,13 @@ for thing in ImpedanceFiles:
         Thetas_Fit = Thetas_Fit + [theta]
         i=i+1
 
-##Nyquist plot##
+    ###Lets output this data in a csv###
     ImArrp = numpy.array(Im)
+    EISData=list(zip(FArr, RArr, -ImArrp, thetas, Real_Boot_Fit, -Imag_Boot_Fit, Thetas_Fit))
+    EISdf = pd.DataFrame(data = EISData, columns=['F(Hz)', 'R(ohm)','-Im(ohm)', 'Theta(degrees)', 'Fit R(ohm)','Fit -Im(ohm)', 'Fit Theta(degrees)'])
+    
+
+##Nyquist plot##
     fig, ax = plt.subplots(figsize=(5,5),dpi=300)
     ax.plot(RArr, -ImArrp, 'o', color = 'black', linewidth=2, label="Measured")
     ax.plot(Real_Boot_Fit, -Imag_Boot_Fit, '-', color = 'blue', linewidth=2, label="Fit")
@@ -151,8 +157,10 @@ for thing in ImpedanceFiles:
     namesplit=thing.split(".")
     name=namesplit[0]
     os.makedirs(name+"Fitting Report")
+    EISdf.to_csv(name + " Pattern Fit to Data.csv",index=False,header=True)
     os.makedirs("Plots")
     os.makedirs("Values")
+    shutil.move(name + " Pattern Fit to Data.csv", "Values")
     shutil.move("Nyquist.png","Plots")
     shutil.move("Nyquist.tiff", "Plots")
     shutil.move("Bode.png", "Plots")
