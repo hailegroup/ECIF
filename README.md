@@ -20,5 +20,6 @@ If you ran the script with the default values using the test data you should hav
 ![Image of Z vs. F](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Bode.png)
 ![Image of Z vs. theta](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Bode_Theta.png)
 ![Image of Nyquist Plot](https://github.com/aplymill7/Impedance-Fitting/blob/master/docs/images/Nyquist.png)
+![Image of Correlation matrix](https://github.com/aplymill7/ECIF/blob/master/docs/images/Correlation%20Matrix.png)
 
 
