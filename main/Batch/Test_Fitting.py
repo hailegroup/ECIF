@@ -19,6 +19,8 @@ from PIL import Image
 import os
 #For moving and sorting files
 import shutil
+
+import seaborn as sns
         
 #Acquire user input from config file
 params = config.Initial_Parameters
@@ -72,7 +74,7 @@ for thing in ImpedanceFiles:
     residuals = fit.res_vec( Fitted_variables, FArr, TotArr)
 
 #Bootstrap to get error and generate final model
-    boot_params = boot.strap(residuals, FArr, TotArr, Fitted_variables, Param_Names)
+    boot_params, corr = boot.strap(residuals, FArr, TotArr, Fitted_variables, Param_Names)
     result = cir.Z(boot_params, FArr, modelname)
     boot_generation = result.z
     Real_Boot_Fit = boot_generation.real
@@ -89,6 +91,25 @@ for thing in ImpedanceFiles:
     EISData=list(zip(FArr, RArr, -ImArrp, thetas, Real_Boot_Fit, -Imag_Boot_Fit, Thetas_Fit))
     EISdf = pd.DataFrame(data = EISData, columns=['F(Hz)', 'R(ohm)','-Im(ohm)', 'Theta(degrees)', 'Fit R(ohm)','Fit -Im(ohm)', 'Fit Theta(degrees)'])
     
+
+#Covariance Plot
+# Generate a mask for the upper triangle
+    mask = numpy.zeros_like(corr, dtype=numpy.bool)
+    mask[numpy.triu_indices_from(mask)] = True
+
+# Set up the matplotlib figure
+    f, ax = plt.subplots(figsize=(11, 9))
+
+# Generate a custom diverging colormap
+    cmap = sns.diverging_palette(255, 133, l=60, n=7, center="dark", as_cmap=True)
+
+# Draw the heatmap with the mask and correct aspect ratio
+    sns.heatmap(corr, mask=mask, cmap=cmap, vmax=1, center=0,
+                square=True, linewidths=.5, cbar_kws={"shrink": .5})
+    plt.savefig("Correlation Matrix.png")
+    png0 = Image.open("Correlation Matrix.png")
+    png0.save("Correlation Matrix.tiff", dpi=(300,300))
+    plt.clf()
 
 ##Nyquist plot##
     fig, ax = plt.subplots(figsize=(5,5),dpi=300)
@@ -161,6 +182,8 @@ for thing in ImpedanceFiles:
     os.makedirs("Plots")
     os.makedirs("Values")
     shutil.move(name + " Pattern Fit to Data.csv", "Values")
+    shutil.move("Correlation Matrix.png","Plots")
+    shutil.move("Correlation Matrix.tiff","Plots")
     shutil.move("Nyquist.png","Plots")
     shutil.move("Nyquist.tiff", "Plots")
     shutil.move("Bode.png", "Plots")
