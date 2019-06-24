@@ -8,7 +8,7 @@ import statistics
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def strap(residuals, FArr, ZArr, params):
+def strap(residuals, FArr, ZArr, params, ParamNames):
 
 #Break apart complex array of original residuals
  length=int(len(residuals)/2)
@@ -28,14 +28,8 @@ def strap(residuals, FArr, ZArr, params):
 #Initialize iterator
  i=0
 
-#Initialize list to carry distributions of fitted variables
- v1 = list()
- v2 = list()
- v3 = list()
- v4 = list()
- v5 = list()
- v6 = list()
- v7 = list()
+#Initilize Matrix to carry disributions of fitted variables
+ Fitted_Variables_Matrix = []
  
  #Initialize Parameters list
  global Param_names
@@ -59,63 +53,24 @@ def strap(residuals, FArr, ZArr, params):
     #Generate a list of variables from fit
     Fitted_variables = list(fit_result.x)
     
-    #Pull out these variables from the list
-    a = Fitted_variables[0]
-    b = Fitted_variables[1]
-    c = Fitted_variables[2]
-    d = Fitted_variables[3]
-    e = Fitted_variables[4]
-    f = Fitted_variables[5]
-    g = Fitted_variables[6]
+    Fitted_Variables_Matrix.append(Fitted_variables)
     
-    #Start adding these fitted variables to distributions of each one
-    v1.append(a)
-    v2.append(b)
-    v3.append(c)
-    v4.append(d)
-    v5.append(e)
-    v6.append(f)
-    v7.append(g)
     i=i+1
     
     Param_names = pn
+
+ Fitted_Variables_Matrix = pd.DataFrame(Fitted_Variables_Matrix, columns=ParamNames)
    
 #Take the standard deviation of each of the fitted variables distributions    
- ev1=statistics.stdev(v1)
- ev2=statistics.stdev(v2)
- ev3=statistics.stdev(v3)
- ev4=statistics.stdev(v4)
- ev5=statistics.stdev(v5)
- ev6=statistics.stdev(v6)
- ev7=statistics.stdev(v7)
+ Stds = Fitted_Variables_Matrix.std(axis=0)
 
 #Take the average fit
- m1=statistics.mean(v1)
- m2=statistics.mean(v2)
- m3=statistics.mean(v3)
- m4=statistics.mean(v4)
- m5=statistics.mean(v5)
- m6=statistics.mean(v6)
- m7=statistics.mean(v7)
+ means = Fitted_Variables_Matrix.mean(axis=0)
 
 #Compile all of the fitted variables errors into a single list
- evz=[]
- evz.append(ev1)
- evz.append(ev2)
- evz.append(ev3)
- evz.append(ev4)
- evz.append(ev5)
- evz.append(ev6)
- evz.append(ev7)
+ evz=list(Stds)
+ ms=list(means)
 
- ms=[]
- ms.append(m1)
- ms.append(m2)
- ms.append(m3)
- ms.append(m4)
- ms.append(m5)
- ms.append(m6)
- ms.append(m7)
 
 #Compile and save these results to a csv 
  Params=list(zip(Param_names, ms, evz))
