@@ -65,14 +65,14 @@ for thing in ImpedanceFiles:
     TotArr=RArr+ImArr
 
 #Fit the data
-    fit_result, dummy = fit.custom_fitting(F, TotArr, params)
+    fit_result, Param_Names = fit.custom_fitting(F, TotArr, params)
     Fitted_variables = fit_result.x
 
 #Obtain the residuals
     residuals = fit.res_vec( Fitted_variables, FArr, TotArr)
 
 #Bootstrap to get error and generate final model
-    boot_params = boot.strap(residuals, FArr, TotArr, Fitted_variables)
+    boot_params = boot.strap(residuals, FArr, TotArr, Fitted_variables, Param_Names)
     result = cir.Z(boot_params, FArr, modelname)
     boot_generation = result.z
     Real_Boot_Fit = boot_generation.real
