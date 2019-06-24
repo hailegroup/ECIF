@@ -60,6 +60,7 @@ def strap(residuals, FArr, ZArr, params, ParamNames):
     Param_names = pn
 
  Fitted_Variables_Matrix = pd.DataFrame(Fitted_Variables_Matrix, columns=ParamNames)
+ Correlation_Matrix = Fitted_Variables_Matrix.corr()
    
 #Take the standard deviation of each of the fitted variables distributions    
  Stds = Fitted_Variables_Matrix.std(axis=0)
@@ -81,4 +82,5 @@ def strap(residuals, FArr, ZArr, params, ParamNames):
  plt.clf()
  
  #Return Fitted Params
- return ms
+ return ms, Correlation_Matrix
+
