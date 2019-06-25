@@ -15,7 +15,8 @@ def Impedance(x, a, b, c, d):
         Real=z.real
         Imag=z.imag
         Mod = np.sqrt(Real ** 2 + Imag ** 2)
-
+#        NegImag=-z.imag
+        
         return Mod
 
 axis_color = 'lightblue'
@@ -29,7 +30,7 @@ fig.subplots_adjust(left=0.25, bottom=0.25)
 x = np.logspace(-1, 6, 50)
 R0 = 1
 R1 = 1
-Q1 = 0.1
+Q1 = 0.01
 Alpha1 = 1
 
 # Draw the initial plot
@@ -52,14 +53,14 @@ R1_slider_ax  = fig.add_axes([0.25, 0.10, 0.65, 0.03], axisbg=axis_color)
 R1_slider = Slider(R1_slider_ax, 'R1', 0.0, 2.5, valinit=R1)
 
 Q1_slider_ax  = fig.add_axes([0.25, 0.05, 0.65, 0.03], axisbg=axis_color)
-Q1_slider = Slider(Q1_slider_ax, 'Q1', 0.05, 0.2, valinit=Q1)
+Q1_slider = Slider(Q1_slider_ax, 'Q1', -7 , -1, valinit=Q1)
 
 A1_slider_ax  = fig.add_axes([0.25, 0.00, 0.65, 0.03], axisbg=axis_color)
 A1_slider = Slider(A1_slider_ax, 'Alpha1', 0.0, 1.0, valinit=Alpha1)
 
 # Define an action for modifying the line when any slider's value changes
 def sliders_on_changed(val):
-    line.set_ydata(Impedance(x, R0_slider.val, R1_slider.val, Q1_slider.val, A1_slider.val))
+    line.set_ydata(Impedance(x, R0_slider.val, R1_slider.val, 10**(Q1_slider.val), A1_slider.val))
     fig.canvas.draw_idle()
 R0_slider.on_changed(sliders_on_changed)
 R1_slider.on_changed(sliders_on_changed)
