@@ -19,7 +19,7 @@ def Impedance(x, a, b, c, d):
         
         return Mod
 
-axis_color = 'lightgoldenrodyellow'
+axis_color = 'lightblue'
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -27,7 +27,7 @@ ax = fig.add_subplot(111)
 # Adjust the subplots region to leave some space for the sliders and buttons
 fig.subplots_adjust(left=0.25, bottom=0.25)
 
-x = np.logspace(0.1, 6, 50)
+x = np.logspace(-1, 6, 50)
 R0 = 1
 R1 = 1
 Q1 = 0.1
@@ -37,7 +37,7 @@ Alpha1 = 1
 # The 'line' variable is used for modifying the line later
 [line] = ax.plot(x, Impedance(x, R0, R1, Q1, Alpha1), linewidth=2, color='red')
 ax.set_xscale('log')
-ax.set_xlim([1, 1000000])
+ax.set_xlim([0.1, 1000000])
 ax.xaxis.tick_top()
 ax.set_ylim([0, 5])
 ax.set_xlabel(xlabel='Frequency(Hz)', position = (0.5, 10))
