@@ -15,8 +15,7 @@ def Impedance(x, a, b, c, d):
         Real=z.real
         Imag=z.imag
         Mod = np.sqrt(Real ** 2 + Imag ** 2)
-#        NegImag=-z.imag
-        
+
         return Mod
 
 axis_color = 'lightblue'
