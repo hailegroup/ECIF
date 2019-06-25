@@ -30,7 +30,7 @@ fig.subplots_adjust(left=0.25, bottom=0.25)
 x = np.logspace(-1, 6, 50)
 R0 = 1
 R1 = 1
-Q1 = 0.01
+Q1 = 0.1
 Alpha1 = 1
 
 # Draw the initial plot
@@ -61,6 +61,7 @@ A1_slider = Slider(A1_slider_ax, 'Alpha1', 0.0, 1.0, valinit=Alpha1)
 # Define an action for modifying the line when any slider's value changes
 def sliders_on_changed(val):
     line.set_ydata(Impedance(x, R0_slider.val, R1_slider.val, 10**(Q1_slider.val), A1_slider.val))
+    Q1_slider.valtext.set_text(10**(Q1_slider.val))
     fig.canvas.draw_idle()
 R0_slider.on_changed(sliders_on_changed)
 R1_slider.on_changed(sliders_on_changed)
