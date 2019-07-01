@@ -80,7 +80,7 @@ reset_button.on_clicked(reset_button_on_clicked)
 
 # Add a set of radio buttons for changing color
 color_radios_ax = fig.add_axes([0.025, 0.5, 0.15, 0.15], axisbg=axis_color)
-color_radios = RadioButtons(color_radios_ax, ('red', 'blue', 'green'), active=0)
+color_radios = RadioButtons(color_radios_ax, ('red', 'blue', 'green', 'purple'), active=0)
 def color_radios_on_clicked(label):
     line.set_color(label)
     fig.canvas.draw_idle()
