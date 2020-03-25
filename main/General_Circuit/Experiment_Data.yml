@@ -1,0 +1,17 @@
+#Meta Deta For Reporting 
+sample_meta_data:
+  sample_name: Example_1
+  sample_date: 01/31/20 #mm/dd/yy
+  sample_surface_area: 1 #cm^2
+experiment_meta_data:
+  impedance_mode: single sine
+  measurement_voltage: 0 #V
+  vs: ocv
+  pertubation_voltage: 20 #mV
+  starting_frequency: 1000000 #Hz
+  ending_frequency: 0.1 #Hz
+  points_per_interval: 10
+  interval_group: per decade
+  spacing: logarithmic
+
+
