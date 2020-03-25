@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-
 #Import the necessary libraries
 import numpy
 import Fitting as fit
 import Bootstrap as boot
+import Meta_Reporter as mr
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -162,6 +161,9 @@ png0 = Image.open("Bode_Theta.png")
 png0.save("Bode_Theta.tiff", dpi=(300,300))
 plt.clf()
 
+#Generate Meta Data report
+mr.meta_report("Experiment_Data.yml")
+
 #Clean up
 os.makedirs("Fitting Report")
 os.makedirs("Plots")
@@ -178,4 +180,6 @@ shutil.move("Bode_Theta.tiff", "Plots")
 shutil.move('Fitted_Parameters.csv', "Values")
 shutil.move("Plots", "Fitting Report")
 shutil.move("Values", "Fitting Report")
+shutil.move("Experiment_Info.txt", "Fitting Report")
+
 
