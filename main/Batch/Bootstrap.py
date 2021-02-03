@@ -18,7 +18,7 @@ def strap(residuals, FArr, ZArr, params, ParamNames):
  #Break apart original complex array
  RArr = ZArr.real
  ImArr = ZArr.imag
- Modulus = np.sqrt(RArr**2 + ImArr**2)
+ Modulus = numpy.sqrt(RArr**2 + ImArr**2)
   
 #Obtain the Statistical parameters of the Residuals from original fitting (Needed input = Real + Imaginary Residuals)
  Real_res_error = statistics.stdev(Real_residuals)
