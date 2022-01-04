@@ -11,7 +11,7 @@ This program fits impedance data with equivalent circuit models using a least-sq
 1. Type in an initial guess for each parameter to be fit inside the brackets.
 1. Open a python console.
 1. Change your working directory to /main/General_Circuit.
-1. Run Fitting.py.
+1. Run Test_Fitting.py.
 
 ## Running the Example ##
 

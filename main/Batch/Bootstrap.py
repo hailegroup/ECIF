@@ -18,6 +18,7 @@ def strap(residuals, FArr, ZArr, params, ParamNames):
  #Break apart original complex array
  RArr = ZArr.real
  ImArr = ZArr.imag
+ Modulus = numpy.sqrt(RArr**2 + ImArr**2)
   
 #Obtain the Statistical parameters of the Residuals from original fitting (Needed input = Real + Imaginary Residuals)
  Real_res_error = statistics.stdev(Real_residuals)
@@ -37,8 +38,8 @@ def strap(residuals, FArr, ZArr, params, ParamNames):
 #Main Bootstrap. Fitting to be performed x times in i<x
  while i<50:
     #Generate a new set of residuals based on the statistics acquired above. 
-    Boot_R_residuals = numpy.random.normal(Real_res_mean,Real_res_error,size=length)
-    Boot_i_residuals = numpy.random.normal(Imag_res_mean,Imag_res_error, size=length)
+    Boot_R_residuals = numpy.random.normal(Real_res_mean,Real_res_error,size=length) * Modulus
+    Boot_i_residuals = numpy.random.normal(Imag_res_mean,Imag_res_error, size=length) * Modulus
     #Generate a new data set based on these residuals (Requires original impedance data)
     new_r_boot = RArr + Boot_R_residuals
     new_i_boot = ImArr + Boot_i_residuals
